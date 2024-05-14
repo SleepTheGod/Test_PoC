@@ -1,0 +1,36 @@
+(venv) root@chi:~/botnet/scripts# python btc.py
+--- request header ---
+GET /inv HTTP/1.1
+Upgrade: websocket
+Host: ws.blockchain.info
+Origin: https://ws.blockchain.info
+Sec-WebSocket-Key: 6Ph1Ht9akjE8eJ6q8J3OAA==
+Sec-WebSocket-Version: 13
+Connection: Upgrade
+
+
+-----------------------
+--- response header ---
+HTTP/1.1 101 Switching Protocols
+Date: Tue, 14 May 2024 22:44:29 GMT
+Connection: upgrade
+Sec-Websocket-Accept: 3brTUWYIjB+sSiPYXP+1svuXln0=
+Upgrade: websocket
+X-Blockchain-Language: en
+X-Blockchain-Language-ID: 0:0:0 (en:en:en)
+X-Request-ID: 767b8680f0406e948366b18ae0e3f577
+X-Original-Host: ws.blockchain.info
+X-Blockchain-Server: BlockchainFE/1.0
+X-Blockchain-CP-F: jkv6 0.008 - 767b8680f0406e948366b18ae0e3f577
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Via: 1.1 google
+CF-Cache-Status: DYNAMIC
+Set-Cookie: _cfuvid=yFK.G1LEVx8z0_9CGNXCZbqxigdhYfWfbAUGIsCakXk-1715726669483-0.0.1.1-604800000; path=/; domain=.blockchain.info; HttpOnly; Secure; SameSite=None
+Server: cloudflare
+CF-RAY: 883e69c32c4fe12b-ORD
+-----------------------
+Websocket connected
+++Sent raw: b"\x81\xc0k\x1a\xe6\xb0\x108\x89\xc0I \xc6\x92\n~\x82\xc24i\x93\xd2I6\xc6\x92\n~\x82\xc2I \xc6\x92X_\x80\xf8?[\x81\xd9'(\xaa\xd3\x03R\xdf\xc5\x1dj\xd5\xc73i\xb4\xd68k\x94\xd3\x02T\xb2\xf1\x19h\xc4\xcd"
+++Sent decoded: fin=1 opcode=1 data=b'{"op": "addr_sub", "addr": "3EfHTAgiL2LchH9uvp3wXsRfSqrciNTArr"}'
