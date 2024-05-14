@@ -1,0 +1,191 @@
+Summary:
+A WebSocket client encounters an abrupt termination after successfully connecting to the WebSocket service at ws.blockchain.info and sending a valid subscription request for transaction updates related to a specific Bitcoin address.
+
+Environment:
+WebSocket Client: Custom Python script using websocket-client library.
+Server: ws.blockchain.info
+Date/Time of Occurrence: May 14, 2024, 23:06:34 GMT
+Python Version: 3.x
+Operating System: Not specified, but applicable to all.
+Steps to Reproduce:
+Establish a WebSocket connection to ws.blockchain.info on the /inv endpoint.
+Send a subscription message for Bitcoin address updates, e.g., {"op": "addr_sub", "addr": "3EfHTAgiL2LchH9uvp3wXsRfSqrciNTArr"}.
+Observe the behavior of the WebSocket connection after the subscription message is sent.
+Expected Behavior:
+After sending the subscription request, the client should remain connected, awaiting real-time updates regarding the specified Bitcoin address transactions.
+
+Actual Behavior:
+The WebSocket connection is established and the subscription request is sent. However, shortly thereafter, the connection is terminated unexpectedly with no specific error code or clear reason provided by the server.
+
+Diagnostic Logs
+
+Request Header:
+
+GET /inv HTTP/1.1
+Upgrade: websocket
+Host: ws.blockchain.info
+Origin: https://ws.blockchain.info
+Sec-WebSocket-Key: ZIHq/jbH7u0qeSHAFRSWFQ==
+Sec-WebSocket-Version: 13
+Connection: Upgrade
+
+
+Response Header:
+HTTP/1.1 101 Switching Protocols
+Date: Tue, 14 May 2024 23:06:34 GMT
+Connection: upgrade
+Sec-Websocket-Accept: YUy92Ofz5WnnpennxQd+Uo78h3k=
+Upgrade: websocket
+...
+Server: cloudflare
+CF-RAY: 883e8a1bfb4922f9-ORD
+
+
+python exploit2.py
+--- request header ---
+2024-05-14 19:07:02,099 - DEBUG - --- request header ---
+GET /inv HTTP/1.1
+Upgrade: websocket
+Host: ws.blockchain.info
+Origin: https://ws.blockchain.info
+Sec-WebSocket-Key: 3rt9rB9SbNwyuXtdAYSgJw==
+Sec-WebSocket-Version: 13
+Connection: Upgrade
+
+
+2024-05-14 19:07:02,099 - DEBUG - GET /inv HTTP/1.1
+Upgrade: websocket
+Host: ws.blockchain.info
+Origin: https://ws.blockchain.info
+Sec-WebSocket-Key: 3rt9rB9SbNwyuXtdAYSgJw==
+Sec-WebSocket-Version: 13
+Connection: Upgrade
+
+-----------------------
+2024-05-14 19:07:02,100 - DEBUG - -----------------------
+--- response header ---
+2024-05-14 19:07:02,100 - DEBUG - --- response header ---
+HTTP/1.1 101 Switching Protocols
+2024-05-14 19:07:02,258 - DEBUG - HTTP/1.1 101 Switching Protocols
+Date: Tue, 14 May 2024 23:07:02 GMT
+2024-05-14 19:07:02,258 - DEBUG - Date: Tue, 14 May 2024 23:07:02 GMT
+Connection: upgrade
+2024-05-14 19:07:02,258 - DEBUG - Connection: upgrade
+Sec-Websocket-Accept: MtMBkvnTykDITdMKGoU7FWhYcY0=
+2024-05-14 19:07:02,258 - DEBUG - Sec-Websocket-Accept: MtMBkvnTykDITdMKGoU7FWhYcY0=
+Upgrade: websocket
+2024-05-14 19:07:02,258 - DEBUG - Upgrade: websocket
+X-Blockchain-Language: en
+2024-05-14 19:07:02,258 - DEBUG - X-Blockchain-Language: en
+X-Blockchain-Language-ID: 0:0:0 (en:en:en)
+2024-05-14 19:07:02,259 - DEBUG - X-Blockchain-Language-ID: 0:0:0 (en:en:en)
+X-Request-ID: 2bcd07ed57931aa5011b7b423a769a29
+2024-05-14 19:07:02,259 - DEBUG - X-Request-ID: 2bcd07ed57931aa5011b7b423a769a29
+X-Original-Host: ws.blockchain.info
+2024-05-14 19:07:02,259 - DEBUG - X-Original-Host: ws.blockchain.info
+X-Blockchain-Server: BlockchainFE/1.0
+2024-05-14 19:07:02,259 - DEBUG - X-Blockchain-Server: BlockchainFE/1.0
+X-Blockchain-CP-F: l6lh 0.005 - 2bcd07ed57931aa5011b7b423a769a29
+2024-05-14 19:07:02,259 - DEBUG - X-Blockchain-CP-F: l6lh 0.005 - 2bcd07ed57931aa5011b7b423a769a29
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+2024-05-14 19:07:02,259 - DEBUG - Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+X-Content-Type-Options: nosniff
+2024-05-14 19:07:02,259 - DEBUG - X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+2024-05-14 19:07:02,259 - DEBUG - X-XSS-Protection: 1; mode=block
+Via: 1.1 google
+2024-05-14 19:07:02,259 - DEBUG - Via: 1.1 google
+CF-Cache-Status: DYNAMIC
+2024-05-14 19:07:02,260 - DEBUG - CF-Cache-Status: DYNAMIC
+Set-Cookie: _cfuvid=NDKWxXWlaFxsiQBQJ8YR9RAr6ip6GahUKA8081ohwUY-1715728022244-0.0.1.1-604800000; path=/; domain=.blockchain.info; HttpOnly; Secure; SameSite=None
+2024-05-14 19:07:02,260 - DEBUG - Set-Cookie: _cfuvid=NDKWxXWlaFxsiQBQJ8YR9RAr6ip6GahUKA8081ohwUY-1715728022244-0.0.1.1-604800000; path=/; domain=.blockchain.info; HttpOnly; Secure; SameSite=None
+Server: cloudflare
+2024-05-14 19:07:02,260 - DEBUG - Server: cloudflare
+CF-RAY: 883e8aca2bbb296e-ORD
+2024-05-14 19:07:02,260 - DEBUG - CF-RAY: 883e8aca2bbb296e-ORD
+-----------------------
+2024-05-14 19:07:02,260 - DEBUG - -----------------------
+Websocket connected
+2024-05-14 19:07:02,261 - INFO - Websocket connected
+2024-05-14 19:07:02,261 - INFO - WebSocket opened. Subscribing to BTC address.
+++Sent raw: b"\x81\xc0'|\xd5f\\^\xba\x16\x05F\xf5DF\x18\xb1\x14x\x0f\xa0\x04\x05P\xf5DF\x18\xb1\x14\x05F\xf5D\x149\xb3.s=\xb2\x0fkN\x99\x05O4\xec\x13Q\x0c\xe6\x11\x7f\x0f\x87\x00t\r\xa7\x05N2\x81'U\x0e\xf7\x1b"
+2024-05-14 19:07:02,261 - DEBUG - ++Sent raw: b"\x81\xc0'|\xd5f\\^\xba\x16\x05F\xf5DF\x18\xb1\x14x\x0f\xa0\x04\x05P\xf5DF\x18\xb1\x14\x05F\xf5D\x149\xb3.s=\xb2\x0fkN\x99\x05O4\xec\x13Q\x0c\xe6\x11\x7f\x0f\x87\x00t\r\xa7\x05N2\x81'U\x0e\xf7\x1b"
+++Sent decoded: fin=1 opcode=1 data=b'{"op": "addr_sub", "addr": "3EfHTAgiL2LchH9uvp3wXsRfSqrciNTArr"}'
+2024-05-14 19:07:02,261 - DEBUG - ++Sent decoded: fin=1 opcode=1 data=b'{"op": "addr_sub", "addr": "3EfHTAgiL2LchH9uvp3wXsRfSqrciNTArr"}'
+2024-05-14 19:08:42,143 - ERROR - WebSocket error: Connection to remote host was lost.
+Connection to remote host was lost. - goodbye
+2024-05-14 19:08:42,143 - ERROR - Connection to remote host was lost. - goodbye
+2024-05-14 19:08:42,143 - WARNING - WebSocket closed with status code None and message None
+
+
+
+python exploit.py
+--- request header ---
+GET /inv HTTP/1.1
+Upgrade: websocket
+Host: ws.blockchain.info
+Origin: https://ws.blockchain.info
+Sec-WebSocket-Key: ZIHq/jbH7u0qeSHAFRSWFQ==
+Sec-WebSocket-Version: 13
+Connection: Upgrade
+
+-----------------------
+--- response header ---
+HTTP/1.1 101 Switching Protocols
+Date: Tue, 14 May 2024 23:06:34 GMT
+Connection: upgrade
+Sec-Websocket-Accept: YUy92Ofz5WnnpennxQd+Uo78h3k=
+Upgrade: websocket
+X-Blockchain-Language: en
+X-Blockchain-Language-ID: 0:0:0 (en:en:en)
+X-Request-ID: 3ab1c8582e5012d501105f469abb68da
+X-Original-Host: ws.blockchain.info
+X-Blockchain-Server: BlockchainFE/1.0
+X-Blockchain-CP-F: jkv6 0.009 - 3ab1c8582e5012d501105f469abb68da
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Via: 1.1 google
+CF-Cache-Status: DYNAMIC
+Set-Cookie: _cfuvid=d.UeTwXD_nysLusHr55iSAVe1EgoxJvAHEe4vVJrI7w-1715727994386-0.0.1.1-604800000; path=/; domain=.blockchain.info; HttpOnly; Secure; SameSite=None
+Server: cloudflare
+CF-RAY: 883e8a1bfb4922f9-ORD
+-----------------------
+Websocket connected
+++Sent raw: b'\x81\xc0w\xa6\x85{\x0c\x84\xea\x0bU\x9c\xa5Y\x16\xc2\xe1\t(\xd5\xf0\x19U\x8a\xa5Y\x16\xc2\xe1\tU\x9c\xa5YD\xe3\xe33#\xe7\xe2\x12;\x94\xc9\x18\x1f\xee\xbc\x0e\x01\xd6\xb6\x0c/\xd5\xd7\x1d$\xd7\xf7\x18\x1e\xe8\xd1:\x05\xd4\xa7\x06'
+++Sent decoded: fin=1 opcode=1 data=b'{"op": "addr_sub", "addr": "3EfHTAgiL2LchH9uvp3wXsRfSqrciNTArr"}'
+
+
+code poc https://github.com/SleepTheGod/Test_PoC/tree/main [Video Proof of concept](https://www.youtube.com/watch?v=QXylgyjk72A)
+
+
+OP CODE
+
+Disassembly
+0x0000000000000000:  81 C0 B9 D6 81 83             add    eax, 0x8381d6b9
+0x0000000000000006:  C2 F4 EE                      ret    0xeef4
+0x0000000000000009:  F3 9B                         wait   
+0x000000000000000b:  EC                            in     al, dx
+0x000000000000000c:  A1 A1 D8 B2 E5 F1 E6 A5 F4    movabs eax, dword ptr [0xf4a5e6f1e5b2d8a1]
+0x0000000000000015:  E1 9B                         loope  0xffffffffffffffb2
+0x0000000000000017:  FA                            cli    
+0x0000000000000018:  A1 A1 D8 B2 E5 F1 9B EC A1    movabs eax, dword ptr [0xa1ec9bf1e5b2d8a1]
+0x0000000000000021:  A1 8A 93 E7 CB ED 97 E6 EA    movabs eax, dword ptr [0xeae697edcbe7938a]
+0x000000000000002a:  F5                            cmc    
+0x000000000000002b:  E4 CD                         in     al, 0xcd
+0x000000000000002d:  E0 D1                         loopne 0
+0x000000000000002f:  9E                            sahf   
+0x0000000000000030:  B8 F6 CF A6 B2                mov    eax, 0xb2a6cff6
+0x0000000000000035:  F4                            hlt    
+0x0000000000000036:  E1 A5                         loope  0xffffffffffffffdd
+0x0000000000000038:  D3 E5                         shl    ebp, cl
+
+Connection Termination:
+
+WebSocket connection is reported as connected, but it terminates abruptly after sending the subscription request.
+Additional Information:
+The server's response headers do not indicate any issues with the connection upgrade or the request itself.
+The issue might involve backend processing at ws.blockchain.info or possibly a misinterpretation of the WebSocket protocol standards by either the client or the server.
+Recommendations:
+Investigate server logs for ws.blockchain.info around the timestamp of the issue to identify any internal errors or mishandling of the WebSocket frames.
+Review WebSocket service configuration and error handling procedures to ensure stability and robustness of connections, especially post-subscription.
